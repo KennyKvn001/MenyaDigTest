@@ -1,0 +1,62 @@
+{% for video_post in video_posts %}
+<div class="roomListRoom">
+  <div class="roomListRoom__header">
+    <a
+      href="{% url 'user-profile' video_post.creator.id %}"
+      class="roomListRoom__author"
+    >
+      <div class="avatar avatar--small">
+        <img src="{{ video_post.creator.avatar.url }}" />
+      </div>
+      <span>@{{ video_post.creator.username }}</span>
+    </a>
+    <div class="roomListRoom__actions">
+      <span>{{ video_post.created_at|timesince }} ago</span>
+    </div>
+  </div>
+  <div class="roomListRoom__content">
+    <a href="{% url 'video_post_detail' video_post.pk %}"
+      >{{video_post.name}}</a
+    >
+    <a href="{% url 'video_post_detail' video_post.id %}">
+      {% if video_post.video_file %}
+      <video width="560" height="280" controls>
+        <source src="{{ video_post.video_file.url }}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      {% elif video_post.video_url %}
+      <video width="640" height="360" controls>
+        <source src="{{ video_post.video_url }}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      {% else %}
+      <p>No video available.</p>
+      {% endif %}
+    </a>
+    <div class="roomListRoom__actions">
+      <p>{{ video_post.description }}</p>
+    </div>
+  </div>
+  <div class="roomListRoom__meta">
+    <a
+      href="{% url 'video_post_detail' video_post.id %}"
+      class="roomListRoom__joined"
+    >
+      <svg
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+      >
+        <title>like</title>
+        <path
+          d="M16 29s-1.295-1.241-2.563-2.445c-2.514-2.29-4.437-4.388-5.937-6.211-1.148-1.323-1.737-2.99-1.736-4.644 0-2.115 1.079-4.02 2.723-5.08 1.606-1.039 3.716-1.45 5.512-1.091 1.096 0.203 2.119 0.674 2.949 1.383 0.829-0.709 1.844-1.182 2.939-1.383 1.596-0.32 3.24 0.122 4.397 1.091 1.644 1.061 2.723 2.965 2.723 5.08 0 1.654-0.588 3.321-1.736 4.644-1.5 1.823-3.423 3.921-5.937 6.211-1.268 1.204-2.563 2.445-2.563 2.445z"
+        ></path>
+      </svg>
+      {{ video_post.likes.count }} Likes
+    </a>
+    <p class="roomListRoom__topic">{{ video_post.topic.name }}</p>
+  </div>
+</div>
+{% endfor %}
