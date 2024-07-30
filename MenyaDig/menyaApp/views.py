@@ -206,7 +206,14 @@ def activityPage(request):
 
 # List view
 def video_post_list(request):
-    video_posts = VideoPost.objects.all()
+    q = request.GET.get("q") if request.GET.get("q") != None else ""
+
+    video_posts = VideoPost.objects.filter(
+        Q(topic__name__icontains=q) | Q(name__icontains=q) | Q(description__icontains=q)
+    ).select_related(
+        "creator"
+    )  # search functionality currently not working
+
     post_count = video_posts.count()
     topics = Topic.objects.all()[0:5]
 

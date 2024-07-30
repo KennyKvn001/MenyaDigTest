@@ -1,10 +1,10 @@
 {% extends 'main.html' %} {% block content %}
-<main class="create-video layout">
+<main class="delete-item layout">
   <div class="container">
     <div class="layout__box">
       <div class="layout__boxHeader">
         <div class="layout__boxTitle">
-          <a href="{% url 'video_post_detail' video_post.pk %}">
+          <a href="{{request.META.HTTP_REFERER}}">
             <svg
               version="1.1"
               xmlns="http://www.w3.org/2000/svg"
@@ -18,23 +18,18 @@
               ></path>
             </svg>
           </a>
-          <h3>Delete Video</h3>
+          <h3>Back</h3>
         </div>
       </div>
       <div class="layout__body">
-        <p>Are you sure you want to delete "{{ video_post.name }}"?</p>
-        <form
-          class="form"
-          action=""
-          method="POST"
-          enctype="multipart/form-data"
-        >
+        <form class="form" method="POST" action="">
           {% csrf_token %}
-          <div class="form__action">
-            <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}"
-              >Cancel</a
-            >
-            <button class="btn btn--main" type="submit">Yes, delete</button>
+          <div class="form__group">
+            <p>Are you sure you want to delete "{{video_post.name}}"?</p>
+          </div>
+
+          <div class="for__group">
+            <input class="btn btn--main" type="submit" value="Confirm" />
           </div>
         </form>
       </div>

@@ -10,7 +10,11 @@
     <!-- Room List Start -->
     <div class="roomList">
       <div class="mobile-menu">
-        <form action="{% url 'home' %}" method="GET" class="header__search">
+        <form
+          action="{% url 'video_post_list'%}"
+          method="GET"
+          class="header__search"
+        >
           <label>
             <svg
               version="1.1"
@@ -40,7 +44,7 @@
       <div class="roomList__header">
         <div>
           <h2>Content Video Post</h2>
-          <p>{{video_post.count}} Posts available</p>
+          <p>{{video_posts.count}} Posts available</p>
         </div>
 
         <a class="btn btn--main" href="{% url 'video_post_create' %}">
