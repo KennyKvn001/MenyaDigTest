@@ -1,0 +1,5 @@
+# Mac
+.DS_Store
+
+#django
+.db.sqlite3
