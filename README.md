@@ -7,6 +7,7 @@ git clone https://github.com/KennyKvn001/MenyaDigital.git
 --> Move into the directory where we have the project files :
 
 cd StudyBud
+
 --> Create a virtual environment :
 
 Let's install virtualenv first
